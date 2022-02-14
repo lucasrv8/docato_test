@@ -1,0 +1,54 @@
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/index" routerLinkActive="active">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Lista de usuários</li>
+        </ol>
+    </nav>
+    <div class="d-flex" style=" flex-basis: 0;justify-content: space-between;
+    align-items: center;">
+        <h1>Lista de usuários</h1>
+        <div class="example-button-container mb-3 me-2" (click)="addUser()">
+            <button mat-fab color="primary">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </div>
+    <mat-accordion class="example-headers-align">
+
+        <mat-expansion-panel *ngFor="let user of users" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{user.name}}
+                </mat-panel-title>
+                <mat-panel-description>
+                    Clique para visualizar detalhes
+                    <mat-icon>account_circle</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <div class="d-flex">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Usuário</mat-label>
+                    <input matInput disabled="true" value="{{user.username}}">
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>E-mail</mat-label>
+                    <input matInput disabled="true" value="{{user.email}}">
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>CPF</mat-label>
+                    <input matInput disabled="true" value="{{user.cpf}}">
+                </mat-form-field>
+            </div>
+
+            <mat-action-row>
+                <button mat-button color="warn" (click)="confirmDelete(user.id, user.name)">Remover</button>
+                <button mat-button color="primary" [routerLink]="['user/edit', user.id]" (click)="editUser(user.id)">Editar</button>
+            </mat-action-row>
+        </mat-expansion-panel>
+
+
+    </mat-accordion>
+
+</div>

@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const database = require('../infra/database');
 
+
 const User = database.define('user', {
     id: {
         type: Sequelize.INTEGER,
@@ -19,7 +20,9 @@ const User = database.define('user', {
     password: {
         type: Sequelize.STRING,
         allowNull: false,
-        // Validade string password
+        validate: {
+			notEmpty: true
+		}
     },
     email: {
         type: Sequelize.STRING,
@@ -40,13 +43,9 @@ const User = database.define('user', {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-            len: [11,11] 
+            len: [11,11],
         }
     },
 })
 
 module.exports = User;
-
-
-// CPF, Nome, Email e um “nome de usuário”, também coloque uma
-// senha para o mesmo para efetuar o login.

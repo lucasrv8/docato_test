@@ -1,0 +1,50 @@
+<div class="container">
+    <!-- <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Home</li>
+        </ol>
+    </nav> -->
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <div class="card highlight-card card-small pt-3 mb-4">
+            <h1 class="display-4 fw-normal fw-700">Seja bem vindo, {{authService.getUser}}</h1>
+        </div>
+        <p class="fs-5 text-muted">Espero que a experiêcia esteja sendo agradavél até aqui! Nesta página, disponibilizei as duas
+            funcionadades solicitadas por meio dos cards abaixo: a lista de produtos e a lista de usuários para testar os endpoints
+            da API</p>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center mx-auto">
+        <div class="col w-50">
+            <div class="card mb-4 rounded-3 shadow-sm border-primary"  style="border-color: #673ab7;">
+                <div class="card-header py-3 text-white bg-primary border-primary" style="background-color: #673ab7!important">
+                    <h4 class="my-0 fw-normal">Lista de produtos</h4>
+                </div>
+                <div class="card-body" style="border-color: #673ab7;">
+                    <h1 class="card-title pricing-card-title">GET<small class="text-muted fw-light">/product</small>
+                    </h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Crawler</li>
+                        <li>Cheerio</li>
+                    </ul>
+                    <button type="button" class="w-100 btn btn-lg btn-primary" style="background-color: #673ab7 !important;"
+                        (click)="renderProduct()">Acessar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col w-50">
+            <div class="card mb-4 rounded-3 shadow-sm">
+                <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">Lista de Usuários</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">API<small class="text-muted fw-light">/user/</small>
+                    </h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>API</li>
+                        <li>Criação, atualização e remoção de dados</li>
+                    </ul>
+                    <button type="button" class="w-100 btn btn-lg btn-outline-primary btn-purpler"  style="border-color: #673ab7;color: #673ab7;" (click)="renderUserList()">Acessar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

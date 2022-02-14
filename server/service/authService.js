@@ -1,22 +1,28 @@
-// const authData = require('../data/authData')
-
-// require("dotenv-safe").config();
-// const jwt = require('jsonwebtoken');
-
+require("dotenv-safe").config()
+const User = require('../model/user')
+const jwt = require('jsonwebtoken')
 
 exports.validateUser = async function(username, password){
-    const findUser = []//await authData.findUserByUsernameAndPassword(username, password)
+    let findUserInstance = await User.findOne({
+        where: {
+            username: username,
+            password: password
+        }
+    })
 
-    if(findUser.length > 0){
-        let userId = findUser[0].id
+
+    if(findUserInstance){
+        let userId = findUserInstance.id
+        
         // Generate access token
         const token = jwt.sign({ userId }, process.env.SECRET, {
-            expiresIn: 86400 // expires in 1 day
+            // expires in 1 day
+            expiresIn: 86400 
         });
 
-        return {statusCode: 200, message: 'Login successfully', token: token }
+        return {status_code: 200, message: 'Login successfully', token: token, username: findUserInstance.username }
 
     }else{
-        return {statusCode: 401, message: 'Access not authorized: Invalid login'}
+        return {status_code: 401, message: 'Access not authorized: Invalid login'}
     }
 }

@@ -1,0 +1,90 @@
+<div style="width: 400px; margin: auto;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/index" routerLinkActive="active">Home</a></li>
+            <li class="breadcrumb-item"><a routerLink="/user/list" routerLinkActive="active">Lista de usuários</a></li>
+            <li *ngIf="id != undefined" class="breadcrumb-item active" aria-current="page">Editar usuário</li>
+            <li *ngIf="id == undefined" class="breadcrumb-item active" aria-current="page">Novo usuário</li>
+        </ol>
+    </nav>
+    <div class="submit-form">
+        <mat-card>
+            <mat-card-title *ngIf="id == undefined">Novo usuário</mat-card-title>
+            <mat-card-title *ngIf="id != undefined">Editar usuário</mat-card-title>
+            <mat-card-subtitle>Informe os dados do usuário</mat-card-subtitle>
+            <mat-card-content>
+                <div *ngIf="infoMessage != undefined" class="alert alert-success align-items-center d-flex" role="alert" style="background-color: #35cd7e;">
+                    <mat-icon matSuffix class="text-white mr-5">check</mat-icon>
+                    <div class="ml-2 mt-1 text-white">
+                        {{infoMessage}}
+                    </div>
+                </div>
+                <div *ngIf="errorsMessages.length > 0" class="alert alert-danger align-items-center" role="alert" style="background-color: #f44336;">
+                    <div *ngFor="let error of errorsMessages">
+                        <p class="ml-2 mt-1 mb-0 text-white">
+                            O campo <strong>{{error['field']}}</strong> não pode ter o valor: <strong>{{(error['rejectValue'] == null?'nulo':error['rejectValue'])}}</strong>.
+                        </p>
+                        <small class="mt-0 text-white">{{error['message']}}</small>
+                    </div>
+                </div>
+                <form (ngSubmit)="submit()">
+                    <p>
+                        <mat-form-field appearance="outline" style="width: 100%; margin: auto;">
+                            <mat-label>Nome</mat-label>
+                            <input matInput placeholder="Informe seu nome" type="text" [(ngModel)]="name" required
+                                name="name">
+                            <mat-icon matSuffix>person</mat-icon>
+                            <!-- <mat-hint>Hint</mat-hint> -->
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="outline" style="width: 100%; margin: auto;">
+                            <mat-label>Usuário</mat-label>
+                            <input matInput placeholder="Informe seu usuario" type="text" [(ngModel)]="username" required
+                                name="username">
+                            <mat-icon matSuffix>account_circle</mat-icon>
+                            <!-- <mat-hint>Hint</mat-hint> -->
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="outline" style="width: 100%; margin: auto;">
+                            <mat-label>E-mail</mat-label>
+                            <input matInput placeholder="Informe seu E-mail" type="email" [(ngModel)]="email" required
+                                name="email">
+                            <mat-icon matSuffix>mail</mat-icon>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="outline" style="width: 100%; margin: auto;">
+                            <mat-label>Senha</mat-label>
+                            <input matInput placeholder="Informe sua senha" type="password" [(ngModel)]="password" required
+                                name="password">
+                            <mat-icon matSuffix>lock</mat-icon>
+                        </mat-form-field>
+                    </p>
+                    <p *ngIf="id != undefined">
+                        <mat-form-field appearance="outline" style="width: 100%; margin: auto;">
+                            <mat-label>Confirmar senha</mat-label>
+                            <input matInput placeholder="Informe sua senha" type="password" [(ngModel)]="confirmePassword" required
+                                name="confirmePassword">
+                            <mat-icon matSuffix>lock</mat-icon>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field appearance="outline" style="width: 100%; margin: auto;">
+                            <mat-label>CPF</mat-label>
+                            <input matInput placeholder="Informe sua CPF" type="text" [(ngModel)]="cpf" required
+                                name="cpf">
+                            <mat-icon matSuffix>lock</mat-icon>
+                            <!-- <mat-hint>Hint</mat-hint> -->
+                        </mat-form-field>
+                    </p>
+                    <div class="example-button-row">
+                        <button mat-raised-button color="primary" style="width: 100%; margin: auto;"
+                            type="submit">{{(id!=null && id != undefined?'ATUALIZAR':'CADASTRAR')}}</button>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="../index" routerLinkActive="active">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Lista de soluções</li>
+        </ol>
+    </nav>
+    <h1>Lista de soluções</h1>
+    <div *ngIf="products == undefined" class="w-100 text-center">
+        <mat-spinner class="mx-auto" diameter="50"></mat-spinner>
+        Aguarde enquanto carregamos nossas soluções
+    </div>
+    <mat-accordion *ngFor="let product of products">
+        <mat-expansion-panel hideToggle  class="mt-5">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{product.name}}
+                </mat-panel-title>
+                <mat-panel-description>
+                    Clique para ver mais detalhes
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>{{product.details['title']}}</p>
+            <p>{{product.details['sub_title']}}</p>
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Soluções
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-expansion-panel *ngFor="let functionality of product.details.functionalities">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        {{functionality.title_functionality}}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                {{functionality.description_functionality}}
+            </mat-expansion-panel>
+            <div class="d-flex mt-3 text-right" style="justify-content: end;">
+                <a *ngIf="product.details.more_details != null" mat-button color="primary" href="{{product.details.more_details}}" target="_blank">Saiba mais</a>
+                <a mat-raised-button color="primary" href="{{product.details.contact_link}}" target="_blank">Contato</a>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

@@ -5,7 +5,7 @@ const router = express.Router()
 const authService = require('../service/authService')
 
 // Define endpoint login
-router.post('/login', async function(req, res){
+router.post('/api/login', async function(req, res){
     const validateUser = await authService.validateUser(req.body.username, req.body.password)
     res.status(validateUser.status_code).json(validateUser)
 })
